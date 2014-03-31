@@ -9,10 +9,8 @@ class UConvert implements UConvertInterface {
 
     const UNICODE = 'UNICODE';
     const TCVN3   = 'TCVN3';
-    const VNI     = 'VNI-WIN';
-    const VNI_WIN = 'VNI-WIN';
+    const VNI     = 'VNI';
     const VIQR    = 'VIQR';
-    const VISCII  = 'VISCII';
 
     /**
      * Text for transform.
@@ -34,154 +32,72 @@ class UConvert implements UConvertInterface {
      * @var array
      */
     protected $maps = array(
-
-        'UNICODE' => array(
-            'a', 'â', 'ă', 'e', 'ê', 'i', 'o', 'ô', 'ơ', 'u', 'ư', 'y',
-            'A', 'Â', 'Ă', 'E', 'Ê', 'I', 'O', 'Ô', 'Ơ', 'U', 'Ư', 'Y',
-            'á', 'ấ', 'ắ', 'é', 'ế', 'í', 'ó', 'ố', 'ớ', 'ú', 'ứ', 'ý',
-            'Á', 'Ấ', 'Ắ', 'É', 'Ế', 'Í', 'Ó', 'Ố', 'Ớ', 'Ú', 'Ứ', 'Ý',
-            'à', 'ầ', 'ằ', 'è', 'ề', 'ì', 'ò', 'ồ', 'ờ', 'ù', 'ừ', 'ỳ',
-            'À', 'Ầ', 'Ằ', 'È', 'Ề', 'Ì', 'Ò', 'Ồ', 'Ờ', 'Ù', 'Ừ', 'Ỳ',
-            'ạ', 'ậ', 'ặ', 'ẹ', 'ệ', 'ị', 'ọ', 'ộ', 'ợ', 'ụ', 'ự', 'ỵ',
-            'Ạ', 'Ậ', 'Ặ', 'Ẹ', 'Ệ', 'Ị', 'Ọ', 'Ộ', 'Ợ', 'Ụ', 'Ự', 'Ỵ',
-            'ả', 'ẩ', 'ẳ', 'ẻ', 'ể', 'ỉ', 'ỏ', 'ổ', 'ở', 'ủ', 'ử', 'ỷ',
-            'Ả', 'Ẩ', 'Ẳ', 'Ẻ', 'Ể', 'Ỉ', 'Ỏ', 'Ổ', 'Ở', 'Ủ', 'Ử', 'Ỷ',
-            'ã', 'ẫ', 'ẵ', 'ẽ', 'ễ', 'ĩ', 'õ', 'ỗ', 'ỡ', 'ũ', 'ữ', 'ỹ',
-            'Ã', 'Ẫ', 'Ẵ', 'Ẽ', 'Ễ', 'Ĩ', 'Õ', 'Ỗ', 'Ỡ', 'Ũ', 'Ữ', 'Ỹ',
-            'd', 'đ', 'D', 'Đ'
+        "UNICODE" => array(
+            "À", "Á", "Â", "Ã", "È", "É", "Ê", "Ì", "Í", "Ò",
+            "Ó", "Ô", "Õ", "Ù", "Ú", "Ý", "à", "á", "â", "ã",
+            "è", "é", "ê", "ì", "í", "ò", "ó", "ô", "õ", "ù",
+            "ú", "ý", "Ă", "ă", "Đ", "đ", "Ĩ", "ĩ", "Ũ", "ũ",
+            "Ơ", "ơ", "Ư", "ư", "Ạ", "ạ", "Ả", "ả", "Ấ", "ấ",
+            "Ầ", "ầ", "Ẩ", "ẩ", "Ẫ", "ẫ", "Ậ", "ậ", "Ắ", "ắ",
+            "Ằ", "ằ", "Ẳ", "ẳ", "Ẵ", "ẵ", "Ặ", "ặ", "Ẹ", "ẹ",
+            "Ẻ", "ẻ", "Ẽ", "ẽ", "Ế", "ế", "Ề", "ề", "Ể", "ể",
+            "Ễ", "ễ", "Ệ", "ệ", "Ỉ", "ỉ", "Ị", "ị", "Ọ", "ọ",
+            "Ỏ", "ỏ", "Ố", "ố", "Ồ", "ồ", "Ổ", "ổ", "Ỗ", "ỗ",
+            "Ộ", "ộ", "Ớ", "ớ", "Ờ", "ờ", "Ở", "ở", "Ỡ", "ỡ",
+            "Ợ", "ợ", "Ụ", "ụ", "Ủ", "ủ", "Ứ", "ứ", "Ừ", "ừ",
+            "Ử", "ử", "Ữ", "ữ", "Ự", "ự", "Ỳ", "ỳ", "Ỵ", "ỵ", 
+            "Ỷ", "ỷ", "Ỹ", "ỹ"
         ),
-
-        'TCVN3' => array(
-            'a', '©', '¨', 'e', 'ª', 'i', 'o', '«', '¬', 'u', '­', 'y',
-            'A', '¢', '¡', 'E', '£', 'I', 'O', '¤', '¥', 'U', '¦', 'Y',
-            '¸', 'Ê', '¾', 'Ð', 'Õ', 'Ý', 'ã', 'è', 'í', 'ó', 'ø', 'ý',
-            '', '', '', '', '', '', '', '', '', '', '', '',
-            'µ', 'Ç', '»', 'Ì', 'Ò', '×', 'ß', 'å', 'ê', 'ï', 'õ', 'ú',
-            '', '', '', '', '', '', '', '', '', '', '', '',
-            '¹', 'Ë', 'Æ', 'Ñ', 'Ö', 'Þ', 'ä', 'é', 'î', 'ô', 'ù', 'þ',
-            '', '', '', '', '', '', '', '', '', '', '', '',
-            '¶', 'È', '¼', 'Î', 'Ó', 'Ø', 'á', 'æ', 'ë', 'ñ', 'ö', 'û',
-            '', '', '', '', '', '', '', '', '', '', '', '',
-            '·', 'É', '½', 'Ï', 'Ô', 'Ü', 'â', 'ç', 'ì', 'ò', '÷', 'ü',
-            '', '', '', '', '', '', '', '', '', '', '', '',
-            'd', '®', 'D', '§'
+        "VNI" => array(
+            "AØ", "AÙ", "AÂ", "AÕ", "EØ", "EÙ", "EÂ", "Ì" , "Í" , "OØ",
+            "OÙ", "OÂ", "OÕ", "UØ", "UÙ", "YÙ", "aø", "aù", "aâ", "aõ",
+            "eø", "eù", "eâ", "ì" , "í" , "oø", "où", "oâ", "oõ", "uø",
+            "uù", "yù", "AÊ", "aê", "Ñ" , "ñ" , "Ó" , "ó" , "UÕ", "uõ",
+            "Ô" , "ô" , "Ö" , "ö" , "AÏ", "aï", "AÛ", "aû", "AÁ", "aá",
+            "AÀ", "aà", "AÅ", "aå", "AÃ", "aã", "AÄ", "aä", "AÉ", "aé",
+            "AÈ", "aè", "AÚ", "aú", "AÜ", "aü", "AË", "aë", "EÏ", "eï",
+            "EÛ", "eû", "EÕ", "eõ", "EÁ", "eá", "EÀ", "eà", "EÅ", "eå",
+            "EÃ", "eã", "EÄ", "eä", "Æ" , "æ" , "Ò" , "ò" , "OÏ", "oï",
+            "OÛ", "oû", "OÁ", "oá", "OÀ", "oà", "OÅ", "oå", "OÃ", "oã",
+            "OÄ", "oä", "ÔÙ", "ôù", "ÔØ", "ôø", "ÔÛ", "ôû", "ÔÕ", "ôõ",
+            "ÔÏ", "ôï", "UÏ", "uï", "UÛ", "uû", "ÖÙ", "öù", "ÖØ", "öø",
+            "ÖÛ", "öû", "ÖÕ", "öõ", "ÖÏ", "öï", "YØ", "yø", "Î" , "î" ,
+            "YÛ", "yû", "YÕ", "yõ"
         ),
-
-        'VNI-WIN' => array(
-            'a', 'aâ', 'aê', 'e', 'eâ', 'i', 'o', 'oâ', 'ô', 'u', 'ö', 'y',
-            'A', 'AÂ', 'AÊ', 'E', 'EÂ', 'I', 'O', 'OÂ', 'Ô', 'U', 'Ö', 'Y',
-            'aù', 'aá', 'aé', 'eù', 'eá', 'í', 'où', 'oá', 'ôù', 'uù', 'öù', 'yù',
-            'AÙ', 'AÁ', 'AÉ', 'EÙ', 'EÁ', 'Í', 'OÙ', 'OÁ', 'ÔÙ', 'UÙ', 'ÖÙ', 'YÙ',
-            'aø', 'aà', 'aè', 'eø', 'eà', 'ì', 'oø', 'oà', 'ôø', 'uø', 'öø', 'yø',
-            'AØ', 'AÀ', 'AÈ', 'EØ', 'EÀ', 'Ì', 'OØ', 'OÀ', 'ÔØ', 'UØ', 'ÖØ', 'YØ',
-            'aï', 'aä', 'aë', 'eï', 'eä', 'ò', 'oï', 'oä', 'ôï', 'uï', 'öï', 'î',
-            'AÏ', 'AÄ', 'AË', 'EÏ', 'EÄ', 'Ò', 'OÏ', 'OÄ', 'ÔÏ', 'UÏ', 'ÖÏ', 'Î',
-            'aû', 'aå', 'aú', 'eû', 'eå', 'æ', 'oû', 'oå', 'ôû', 'uû', 'öû', 'yû',
-            'AÛ', 'AÅ', 'AÚ', 'EÛ', 'EÅ', 'Æ', 'OÛ', 'OÅ', 'ÔÛ', 'UÛ', 'ÖÛ', 'YÛ',
-            'aõ', 'aã', 'aü', 'eõ', 'eã', 'ó', 'oõ', 'oã', 'ôõ', 'uõ', 'öõ', 'yõ',
-            'AÕ', 'AÃ', 'AÜ', 'EÕ', 'EÃ', 'Ó', 'OÕ', 'OÃ', 'ÔÕ', 'UÕ', 'ÖÕ', 'YÕ',
-            'd', 'ñ', 'D', 'Ñ'
+        "TCVN3" => array(
+            "Aµ", "A¸", "¢" , "A·", "EÌ", "EÐ", "£" , "I×", "IÝ", "Oß",
+            "Oã", "¤" , "Oâ", "Uï", "Uó", "Yý", "µ" , "¸" , "©" , "·" ,
+            "Ì" , "Ð" , "ª" , "×" , "Ý" , "ß" , "ã" , "«" , "â" , "ï" ,
+            "ó" , "ý" , "¡" , "¨" , "§" , "®" , "IÜ", "Ü" , "Uò", "ò" ,
+            "¥" , "¬" , "¦" , "­"  , "A¹", "¹" , "A¶", "¶" , "¢Ê", "Ê" ,
+            "¢Ç", "Ç" , "¢È", "È" , "¢É", "É" , "¢Ë", "Ë" , "¡¾", "¾" ,
+            "¡»", "»" , "¡¼", "¼" , "¡½", "½" , "¡Æ", "Æ" , "EÑ", "Ñ" ,
+            "EÎ", "Î" , "EÏ", "Ï" , "£Õ", "Õ" , "£Ò", "Ò" , "£Ó", "Ó" ,
+            "£Ô", "Ô" , "£Ö", "Ö" , "IØ", "Ø" , "IÞ", "Þ" , "Oä", "ä" ,
+            "Oá", "á" , "¤è", "è" , "¤å", "å" , "¤æ", "æ" , "¤ç", "ç" ,
+            "¤é", "é" , "¥í", "í" , "¥ê", "ê" , "¥ë", "ë" , "¥ì", "ì" ,
+            "¥î", "î" , "Uô", "ô" , "Uñ", "ñ" , "¦ø", "ø" , "¦õ", "õ" ,
+            "¦ö", "ö" , "¦÷", "÷" , "¦ù", "ù" , "Yú", "ú" , "Yþ", "þ" ,
+            "Yû", "û" , "Yü", "ü"
         ),
-
         "VIQR" => array(
-            "a", "a^", "a(", "e", "e^", "i", "o", "o^", "o+", "u", "u+", "y",
-            "A", "A^", "A(", "E", "E^", "I", "O", "O^", "O+", "U", "U+", "Y",
-            "a'", "a^'", "a('", "e'", "e^'", "i'", "o'", "o^'", "o+'", "u'", "u+'", "y'",
-            "A'", "A^'", "A('", "E'", "E^'", "I'", "O'", "O^'", "O+'", "U'", "U+'", "Y'",
-            "a`", "a^`", "a(`", "e`", "e^`", "i`", "o`", "o^`", "o+`", "u`", "u+`", "y`",
-            "A`", "A^`", "A(`", "E`", "E^`", "I`", "O`", "O^`", "O+`", "U`", "U+`", "Y`",
-            "a.", "a^.", "a(.", "e.", "e^.", "i.", "o.", "o^.", "o+.", "u.", "u+.", "y.",
-            "A.", "A^.", "A(.", "E.", "E^.", "I.", "O.", "O^.", "O+.", "U.", "U+.", "Y.",
-            "a?", "a^?", "a(?", "e?", "e^?", "i?", "o?", "o^?", "o+?", "u?", "u+?", "y?",
-            "A?", "A^?", "A(?", "E?", "E^?", "I?", "O?", "O^?", "O+?", "U?", "U+?", "Y?",
-            "a~", "a^~", "a(~", "e~", "e^~", "i~", "o~", "o^~", "o+~", "u~", "u+~", "y~",
-            "A~", "A^~", "A(~", "E~", "E^~", "I~", "O~", "O^~", "O+~", "U~", "U+~", "Y~",
-            "d", "dd", "D", "DD"
+            "A`" , "A'" , "A^" , "A~" , "E`" , "E'" , "E^" , "I`" , "I'" , "O`" ,
+            "O'" , "O^" , "O~" , "U`" , "U'" , "Y'" , "a`" , "a'" , "a^" , "a~" ,
+            "e`" , "e'" , "e^" , "i`" , "i'" , "o`" , "o'" , "o^" , "o~" , "u`" ,
+            "u'" , "y'" , "A(" , "a(" , "DD" , "dd" , "I~" , "i~" , "U~" , "u~" ,
+            "O+" , "o+" , "U+" , "u+" , "A." , "a." , "A?" , "a?" , "A^'", "a^'",
+            "A^`", "a^`", "A^?", "a^?", "A^~", "a^~", "A^.", "a^.", "A('", "a('",
+            "A(`", "a(`", "A(?", "a(?", "A(~", "a(~", "A(.", "a(.", "E." , "e." ,
+            "E?" , "e?" , "E~" , "e~" , "E^'", "e^'", "E^`", "e^`", "E^?", "e^?",
+            "E^~", "e^~", "E^.", "e^.", "I?" , "i?" , "I." , "i." , "O." , "o." ,
+            "O?" , "o?" , "O^'", "o^'", "O^`", "o^`", "O^?", "o^?", "O^~", "o^~",
+            "O^.", "o^.", "O+'", "o+'", "O+`", "o+`", "O+?", "o+?", "O+~", "o+~",
+            "O+.", "o+.", "U." , "u." , "U?" , "u?" , "U+'", "u+'", "U+`", "u+`",
+            "U+?", "u+?", "U+~", "u+~", "U+.", "u+.", "Y`" , "y`" , "Y." , "y." ,
+            "Y?" , "y?" , "Y~" , "y~"
         ),
-
-        "VISCII" => array(
-            "a", "â", "å", "e", "ê", "i", "o", "ô", "½", "u", "ß", "y",
-            "A", "Â", "Å", "E", "Ê", "I", "O", "Ô", "´", "U", "¿", "Y",
-            "á", "¤", "í", "é", "ª", "í", "ó", "¯", "¾", "ú", "Ñ", "ý",
-            "Á", "„", "", "É", "Š", "Í", "Ó", "", "•", "Ú", "º", "Ý",
-            "à", "¥", "¢", "è", "«", "ì", "ò", "°", "¶", "ù", "×", "Ï",
-            "À", "…", "‚", "È", "‹", "Ì", "Ò", "", "–", "Ù", "»", "Ÿ",
-            "Õ", "§", "£", "©", "®", "¸", "÷", "µ", "þ", "ø", "ñ", "Ü",
-            "€", "‡", "ƒ", "‰", "Ž", "˜", "š", "“", "”", "ž", "¹", "",
-            "ä", "¦", "Æ", "ë", "¬", "ï", "ö", "±", "·", "ü", "Ø", "Ö",
-            "Ä", "†", "", "Ë", "Œ", "›", "™", "‘", "—", "œ", "¼", "",
-            "ã", "ç", "Ç", "¨", "­", "î", "õ", "²", "Þ", "û", "æ", "Û",
-            "Ã", "", "", "ˆ", "", "Î", "", "’", "³", "", "ÿ", "",
-            "d", "ð", "D", "Ð"
-        ),
-
     );
     
-    /**
-     * Converts source to Unicode. 
-     * 
-     * @param  string $text
-     * @param  string $character
-     * @return string
-     */
-    public static function toUnicode($text, $character = null)
-    {
-        $convert = new static($text, $character);
-        return $convert->transform(static::UNICODE);
-    }
-
-    /**
-     * Converts source to TCVN3.
-     * 
-     * @param  string $text
-     * @param  string $character
-     * @return string
-     */
-    public static function toTcvn3($text, $character = null)
-    {
-        $convert = new static($text, $character);
-        return $convert->transform(static::TCVN3);
-    }
-
-    /**
-     * Converts source to VNI. 
-     * 
-     * @param  string $text
-     * @param  string $character
-     * @return string
-     */
-    public static function toVni($text, $character = null)
-    {
-        $convert = new static($text, $character);
-        return $convert->transform(static::VNI_WIN);
-    }
-
-    /**
-     * Converts source to VIQR. 
-     * 
-     * @param  string $text
-     * @param  string $character
-     * @return string
-     */
-    public static function toViqr($text, $character = null)
-    {
-        $convert = new static($text, $character);
-        return $convert->transform(static::VIQR);
-    }
-
-    /**
-     * Converts source to VISCII. 
-     * 
-     * @param  string $text
-     * @param  string $character
-     * @return string
-     */
-    public static function toViscii($text, $character = null)
-    {
-        $convert = new static($text, $character);
-        return $convert->transform(static::VISCII);
-    }
-
     /**
      * Setup for new UConvert.
      * 
@@ -191,7 +107,10 @@ class UConvert implements UConvertInterface {
     public function __construct($text, $character = null)
     {
         $this->setText($text);
-        $this->setCharacter(is_null($character) ? $this->detectCharacter($text) : $character);
+        $this->setCharacter(is_null($character) ?
+            $this->detectCharacter($text) :
+            $character
+        );
     }
 
     /**
@@ -203,16 +122,25 @@ class UConvert implements UConvertInterface {
     public function transform($toCharacter)
     {
         $text = $this->getText();
-        $from = $this->getMap($this->getCharacter());
-        $to   = $this->getMap($toCharacter);
+        $toCharacter = strtoupper($toCharacter);
+        $currentCharacter = $this->getCharacter();
 
-        for ($i = count($from) - 1; $i > 0; $i--)
+        if ($toCharacter === $currentCharacter)
+        {
+            return $this->getText();
+        }
+
+        $from  = $this->getMap($currentCharacter);
+        $to    = $this->getMap($toCharacter);
+        $count = count($from) - 1;
+
+        for ($i = $count; $i > 0; $i--)
         {
             $char = $this->getCharPosition($from, $i);
             $text = str_replace($char, '::'.$i.'::', $text);
         }
 
-        for ($i = count($from) - 1; $i > 0; $i--)
+        for ($i = $count; $i > 0; $i--)
         {
             $char = $this->getCharPosition($to, $i);
             $text = str_replace('::'.$i.'::', $char, $text);
@@ -272,7 +200,7 @@ class UConvert implements UConvertInterface {
      * Get char-position from the map-data.
      * 
      * @param  string $map
-     * @param  int $index
+     * @param  int    $index
      * @return string
      */
     protected function getCharPosition($map, $index)
@@ -294,7 +222,7 @@ class UConvert implements UConvertInterface {
             return $this->maps[$name];
         }
 
-        throw new MapDataException('Map-data [$name] Is Currently Not Registered.');
+        throw new MapDataException("Map-data [$name] is currently not registered.");
     }
 
     /**
@@ -305,7 +233,31 @@ class UConvert implements UConvertInterface {
      */
     protected function detectCharacter($text)
     {
-        throw new DetectCharacterException("Cannot Detect Character.");
+        throw new DetectCharacterException("Cannot detect character.");
+    }
+
+    /**
+     * Handle dynamic, static calls to the non-method.
+     * 
+     * @param  string $method
+     * @param  array  $args
+     * @return mixed
+     */
+    public static function __callStatic($method, $args)
+    {
+        $toCharacter = substr($method, 2);
+        $allowMethod = array('Unicode', 'Vni', 'Tcvn3', 'Viqr');
+
+        if (substr($method, 0, 2) === 'to' && count($args) === 2 &&
+            in_array($toCharacter, $allowMethod) )
+        {
+            list($text, $character) = $args;
+
+            $convert = new static($text, $character);
+            return $convert->transform($toCharacter);
+        }
+
+        throw new \BadMethodCallException("Method [$method] not found in UConvert.");
     }
 
 }
