@@ -27,7 +27,7 @@ class UConvert implements UConvertInterface {
     protected $character;
 
     /**
-     * Data-maps for transform.
+     * Maps-data for transform.
      * 
      * @var array
      */
@@ -197,15 +197,16 @@ class UConvert implements UConvertInterface {
     }
 
     /**
-     * Get char-position from the map-data.
+     * Set custom map-data.
      * 
-     * @param  string $map
-     * @param  int    $index
-     * @return string
+     * @param string $name
+     * @param array  $array
+     * @return UConvert
      */
-    protected function getCharPosition($map, $index)
+    public function setMap($name, array $array)
     {
-        return isset($map[$index]) ? $map[$index] : '';
+        $this->maps[strtoupper($name)] = $array;
+        return $this;
     }
 
     /**
@@ -215,7 +216,7 @@ class UConvert implements UConvertInterface {
      * @throws InvalidArgumentException
      * @return array
      */
-    protected function getMap($name)
+    public function getMap($name)
     {
         if (isset($this->maps[$name]))
         {
@@ -223,6 +224,28 @@ class UConvert implements UConvertInterface {
         }
 
         throw new MapDataException("Map-data [$name] is currently not registered.");
+    }
+
+    /**
+     * Return maps-data.
+     * 
+     * @return array
+     */
+    public function getMaps()
+    {
+        return $this->maps;
+    }
+
+    /**
+     * Get char-position from the map-data.
+     * 
+     * @param  string $map
+     * @param  int    $index
+     * @return string
+     */
+    protected function getCharPosition($map, $index)
+    {
+        return isset($map[$index]) ? $map[$index] : '';
     }
 
     /**
