@@ -10,11 +10,10 @@ class UConvertTest extends PHPUnit_Framework_TestCase {
      * @var array
      */
     protected $strings = array(
-        'UNICODE' => 'Hành trình phá án: Bí ẩn xác chết bên triền đê',
-        'VNI-WIN' => 'Haønh trình phaù aùn: Bí aån xaùc cheát beân trieàn ñeâ',
-        'TCVN3'   => 'Hµnh tr×nh ph¸ ¸n: BÝ Èn x¸c chÕt bªn triÒn ®ª',
-        'VIQR'    => "Ha`nh tri`nh pha' a'n: Bi' a^?n xa'c che^'t be^n trie^`n dde^",
-        'VISCII'  => 'Hành trình phá án: Bí ¦n xác chªt bên tri«n ðê'
+        "UNICODE" => "Hàn Quốc hôm nay bắn pháo đáp trả Triều Tiên, bởi cho rằng pháo của Triều Tiên bắn sang vùng biển của nước này",
+        "VNI"     => "Haøn Quoác hoâm nay baén phaùo ñaùp traû Trieàu Tieân, bôûi cho raèng phaùo cuûa Trieàu Tieân baén sang vuøng bieån cuûa nöôùc naøy",
+        "VIQR"    => "Ha`n Quo^'c ho^m nay ba('n pha'o dda'p tra? Trie^`u Tie^n, bo+?i cho ra(`ng pha'o cu?a Trie^`u Tie^n ba('n sang vu`ng bie^?n cu?a nu+o+'c na`y",
+        "TCVN3"   => "Hµn Quèc h«m nay b¾n ph¸o ®¸p tr¶ TriÒu Tiªn, bëi cho r»ng ph¸o cña TriÒu Tiªn b¾n sang vïng biÓn cña n­íc nµy",
     );
 
     /**
@@ -30,7 +29,10 @@ class UConvertTest extends PHPUnit_Framework_TestCase {
         {
             foreach ($characters as $to)
             {
-                $this->generateTransform($from, $to);
+                $convert = new UConvert($this->strings[$from], $from);
+                
+                $trans = $convert->transform($to);
+                $this->assertEquals($trans, $this->strings[$to]);
             }
         }
     }
@@ -43,44 +45,22 @@ class UConvertTest extends PHPUnit_Framework_TestCase {
     public function testStatic()
     {
         // VNI to Unicode
-        $unicode = UConvert::toUnicode($this->strings['VNI-WIN'], UConvert::VNI_WIN);
+        $unicode = UConvert::toUnicode($this->strings['VNI'], UConvert::VNI);
         $this->assertEquals($unicode, $this->strings['UNICODE']);
 
         // Unicode to VNI
         $vni = UConvert::toVni($this->strings['UNICODE'], UConvert::UNICODE);
-        $this->assertEquals($vni, $this->strings['VNI-WIN']);
-            
+        $this->assertEquals($vni, $this->strings['VNI']);
+        
         // VNI to TCVN3
-        $tcvn3 = UConvert::toTcvn3($this->strings['VNI-WIN'], UConvert::VNI_WIN);
+        $tcvn3 = UConvert::toTcvn3($this->strings['VNI'], UConvert::VNI);
         $this->assertEquals($tcvn3, $this->strings['TCVN3']);
 
         // TCVN3 to VNQR
         $viqr = UConvert::toViqr($this->strings['TCVN3'], UConvert::TCVN3);
         $this->assertEquals($viqr, $this->strings['VIQR']);
 
-        // UNICODE to VISCII
-        $viscii = UConvert::toViscii($this->strings['UNICODE'], UConvert::UNICODE);
-        $this->assertEquals($viscii, $this->strings['VISCII']);
-
         // ...
-    }
-
-    /**
-     * [generateTransform description]
-     * 
-     * @param  [type] $from [description]
-     * @param  [type] $to   [description]
-     * @return [type]       [description]
-     */
-    protected function generateTransform($from, $to)
-    {
-        $convert = new UConvert($this->strings[$from], $from);
-         
-        $trans = $convert->transform($to);
-        $this->assertEquals($trans, $this->strings[$to]);
-
-        $rollback = $convert->transform($from);
-        $this->assertEquals($rollback, $this->strings[$from]);
     }
 
 }
