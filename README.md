@@ -90,7 +90,7 @@ use Anhskohbo\UConvert\UConvert;
 $vni_string = "Xin chaøo theá giôùi";
 
 // Khoi tao UConvert voi string va bang ma cua no.
-$convert    = new UConvert($string, UConvert::VNI);
+$convert    = new UConvert($vni_string, UConvert::VNI);
 
 // Chuyen doi sang UNICODE
 echo $convert->transform(UConvert::UNICODE);
