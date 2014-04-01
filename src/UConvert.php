@@ -268,19 +268,26 @@ class UConvert implements UConvertInterface {
      */
     public static function __callStatic($method, $args)
     {
-        $toCharacter = substr($method, 2);
-        $allowMethod = array('Unicode', 'Vni', 'Tcvn3', 'Viqr');
-
-        if (substr($method, 0, 2) === 'to' && count($args) === 2 &&
-            in_array($toCharacter, $allowMethod) )
+        if (count($args) === 2)
         {
             list($text, $character) = $args;
-
             $convert = new static($text, $character);
-            return $convert->transform($toCharacter);
+            
+            $toCharacter = substr($method, 2);
+            $allowMethod = array_map(function($string)
+            {
+                return ucfirst(strtolower($string));
+            }, array_keys($convert->getMaps()));
+
+            if (substr($method, 0, 2) === 'to' && in_array($toCharacter, $allowMethod))
+            {
+                return $convert->transform($toCharacter);
+            }
+
+            throw new \BadMethodCallException("Method [$method] not found in UConvert.");
         }
 
-        throw new \BadMethodCallException("Method [$method] not found in UConvert.");
+        throw new InvalidArgumentException("Invalid arguments.");
     }
 
 }
