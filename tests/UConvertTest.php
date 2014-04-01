@@ -31,8 +31,13 @@ class UConvertTest extends PHPUnit_Framework_TestCase {
             {
                 $convert = new UConvert($this->strings[$from], $from);
                 
+                // Convert $from to $to
                 $trans = $convert->transform($to);
                 $this->assertEquals($trans, $this->strings[$to]);
+
+                // Convert $to to $from
+                $roll = $convert->transform($from);
+                $this->assertEquals($roll, $this->strings[$from]);
             }
         }
     }
