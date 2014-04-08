@@ -287,7 +287,7 @@ class UConvert implements UConvertInterface {
             throw new \BadMethodCallException("Method [$method] not found in UConvert.");
         }
 
-        throw new InvalidArgumentException("Invalid arguments.");
+        throw new \InvalidArgumentException("Invalid arguments.");
     }
 
 }
